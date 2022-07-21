@@ -1,0 +1,129 @@
+{% extends "layout.html.twig" %}
+
+
+
+{% block title %}
+    Recherche de chambres
+{% endblock %}
+
+{% block stylesheets %}
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+
+<style>
+   
+    .slider {
+        width: 500px;
+        height: 300px;
+        background-color: yellow;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0px;
+        text-align: center;
+        overflow: hidden;
+      }
+      .image-container {
+        width: 1500px;
+        background-color: pink;
+        height: 300px;
+        clear: both;
+        position: relative;
+        -webkit-transition: left 2s;
+        -moz-transition: left 2s;
+        -o-transition: left 2s;
+        transition: left 2s;
+      }
+      .slide {
+        float: left;
+        margin: 0px;
+        padding: 0px;
+        position: relative;
+      }
+       #slide-1:target ~ .image-container {
+        left: 0px;
+      }
+      #slide-2:target ~ .image-container {
+        left: -500px;
+      }
+      #slide-3:target ~ .image-container {
+        left: -1000px;
+      } 
+      .buttons {
+        position: relative;
+        top: -20px;
+      }
+      .buttons a {
+        display: inline-block;
+        height: 15px;
+        width: 15px;
+        border-radius: 50px;
+        background-color: lightgreen;
+      }
+
+      .reserverBtn {
+        border: 5px solid green;
+        border-radius: 25px;
+        margin-top: 20px;
+      }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row mt-5">
+    
+    <div class="col-md-2 justify-content-center pt-4">
+        <h3>Filtres</h3>
+        <ul class="list-group">
+            {# {% for categorie in categories %}
+                <a class="text-decoration-none" href="{{ path('produits_categorie', {id: categorie.id}) }}"> <li class="list-group-item btn btn-primary text-center">{{ categorie.nom }}</li> </a>           
+            {% endfor %} #}
+             Restaurant <input type="checkbox" />
+             Prix Minimum <input type="number" />
+             Prix Maximum <input type="number" />
+             Piscine <input type="checkbox" />
+             Bar <input type="checkbox" />
+        </ul>
+    </div>
+    
+    <div class="col-md-10 justify-content-center text-center">
+        <h4>Chambres </h4>
+        {% for chambre in chambres %} 
+            <div class="row justify-content-center" >
+                <div class="col card mb-3 " style="max-width: 900px;">
+                    <div class="row g-0">
+                        <div class="col-md-8 text-center">
+                            <div class="slider">
+                                <span id="slide-1"></span>
+                                <span id="slide-2"></span>
+                                <span id="slide-3"></span>
+                                <div class="image-container">
+                                    <img src="{{ asset('photosChambres/' ~ chambre.photo1) }}" class="slide" width="500" height="300">
+                                    <img src="{{ asset('photosChambres/' ~ chambre.photo2) }}" class="slide" width="500" height="300">
+                                    <img src="{{ asset('photosChambres/' ~ chambre.photo3) }}" class="slide" width="500" height="300">
+                                </div>
+                                <div class="buttons">
+                                    <a href="#slide-1"></a>
+                                    <a href="#slide-2"></a>
+                                    <a href="#slide-3"></a>
+                                </div>
+                            </div>
+                            {# <img src="{{ asset('photosChambres/' ~ chambre.photo1) }}" class="img-fluid rounded-start"> #}
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card-body text-center">
+                                {# <h4 class="card-title"><a href="{{ path('produit_show', {id: produit.id}) }}">{{produit.titre}}</a></h4> #}
+                                <h5>Description : {{ chambre.drescription }}</h5>
+                                <h5>prix : <strong>{{ chambre.prix }}€</strong></h5>
+                                <h5>Options : {{ chambre.options }}</h5>
+
+                                <button type="button" class="btn btn-warning reserverBtn">Reserver</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

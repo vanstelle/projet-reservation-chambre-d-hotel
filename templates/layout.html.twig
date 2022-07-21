@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{{ path('app_home') }}">Booking Hotel</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              
+                {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                </li>
+              {% endif %}
+                 
+                {% if is_granted("IS_AUTHENTICATED_FULLY") and is_granted("ROLE_ADMIN") %}
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Admin
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="{{ path('admin_ajout_chambre') }}">Ajout d'une
+                              Chambre  </a></li>
+                        <li><a class="dropdown-item" href="{{ path('admin_gestion_chambres') }}">Gestion
+                                Chambres</a></li>
+                    </ul>
+                  </li>
+                {% endif %}
+        
+              </li>
+            </ul>
+          </div>
+        
+      </div>
+    </nav>    
+</header>
+
+<main class="container mb-5 mt-5">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="fixed-bottom bg-dark">
+    <div class="text-center text-white">
+        <p>&copy; tous droits non reservés, Ma Boutique</p>
+    </div>
+</footer>
+{% endblock %}

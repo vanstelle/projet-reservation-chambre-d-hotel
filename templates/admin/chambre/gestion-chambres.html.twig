@@ -1,0 +1,51 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}gestion chambres{% endblock %}
+
+{% block content %}
+<a href="{{ path("admin_ajout_chambre") }}"><button type="button" class="btn btn-success text-white">ajouter un
+    chambre</button></a>
+<table class="table text-center ">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">description</th>
+      <th scope="col">prix</th>
+      <th scope="col">options</th>
+      <th scope="col">photo 1</th>
+      <th scope="col">photo 2</th>
+      <th scope="col">photo 3</th>
+      <th scope="col">photo 4</th>
+      <th scope="col">photo 5</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for chambre in chambres %}
+    <tr>
+      <td>{{ chambre.id }}</td>
+      <td>{{ chambre.drescription | slice(0, 50) }}</td>
+      <td>{{ chambre.prix }}</td>
+      <td>{{ chambre.options }}</td>
+      <td><img class="img-thumbnail" src="{{ asset('photosChambres/' ~ chambre.photo1) }}" alt="">
+      </td>
+      <td><img class="img-thumbnail" src="{{ asset('photosChambres/' ~ chambre.photo2) }}" alt="">
+      </td>
+      <td><img class="img-thumbnail" src="{{ asset('photosChambres/' ~ chambre.photo3) }}" alt="">
+      </td>
+      <td><img class="img-thumbnail" src="{{ asset('photosChambres/' ~ chambre.photo4) }}" alt="">
+      </td>
+      <td><img class="img-thumbnail" src="{{ asset('photosChambres/' ~ chambre.photo5) }}" alt="">
+      </td>
+      
+      <td>
+        
+        <a href="{{ path('admin_modifier_chambre', {id: chambre.id}) }}">update</a> 
+        <a href="{{ path('admin_delete_chambre', {id: chambre.id}) }}"
+          onclick="return confirm('êtes vous sûr de vouloir supprimer cette chambre ?')">delete</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

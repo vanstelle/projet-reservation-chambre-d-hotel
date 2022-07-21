@@ -1,0 +1,24 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h1>Inscription</h1>
+    </div>
+
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.nomHotel) }}
+        {{ form_row(registrationForm.ville) }}
+        {{ form_row(registrationForm.adresse) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.telephone) }}
+        {{ form_row(registrationForm.etoiles) }}
+        {{ form_row(registrationForm.options) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    {{ form_end(registrationForm) }}
+{% endblock %}

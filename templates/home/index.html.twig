@@ -1,0 +1,63 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Bienvenue sur Booking Hotel{% endblock %}
+
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1>Booking Hotel vous souhaite la bienvenue!!</h1>
+
+    <h2>Indiquez vos dates afin de voir nos derniers tarifs et nos offres.</h2>
+</div>
+ 
+ <div class="col-md-10 col-md-offset-1">
+   <div class="row">
+     <h3> <strong> Quelle est votre destination ? </strong>  </h3>
+   </div>
+
+   <div class="row">
+        <div class="col-sm-3 p-3">
+           <input type="text" class="form-control" id="idDestination" name="destination" placeholder="Destination" />
+        </div>
+        <div class="col-sm-3 p-3"> 
+           <input class="form-control" type="text" id="idDebut" name="dateDebut" placeholder="Date Debut" onfocus="(this.type='date')">
+        </div>
+        <div class="col-sm-3 p-3"> 
+           <input class="form-control" type="text" id="idFin" name="dateFin" placeholder="Date Fin" onfocus="(this.type='date')">
+        </div>
+        <div class="col-sm-3 p-3">
+          <button class="btn btn-primary" onclick="search()">
+             <span class="spinner-border spinner-border-sm"></span>
+             Rechercher
+          </button>
+        </div>
+    </div>
+
+    <div class"row">
+        <div id="earlylife_images">
+            <figure>
+                <img src="{{ asset('static/image1.jpg') }}" alt="Bienvenue sur booking hotel" width="120%">
+                <figcaption>A Paradise on hearth</figcaption>
+            </figure>
+        </div>  
+    </div>
+ 
+ 
+ </div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+  function search() {
+    var destination = document.getElementById("idDestination").value;
+    var dateDebut = document.getElementById("idDebut").value;
+    var dateFin = document.getElementById("idFin").value;
+
+    console.log(destination);
+    //console.log(window.location.href);
+    var searchLink = window.location.href + "recherche/"+destination + "/" + dateDebut + "/" + dateFin;
+    window.location.href =searchLink;
+  }
+</script>
+{% endblock %}
