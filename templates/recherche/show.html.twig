@@ -1,0 +1,159 @@
+{% extends "layout.html.twig" %}
+
+{% block stylesheets %}
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+
+<style>
+   
+    .slider {
+        width: 500px;
+        height: 300px;
+        background-color: yellow;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0px;
+        text-align: center;
+        overflow: hidden;
+      }
+      .image-container {
+        width: 1500px;
+        background-color: pink;
+        height: 300px;
+        clear: both;
+        position: relative;
+        -webkit-transition: left 2s;
+        -moz-transition: left 2s;
+        -o-transition: left 2s;
+        transition: left 2s;
+      }
+      .slide {
+        float: left;
+        margin: 0px;
+        padding: 0px;
+        position: relative;
+      }
+       #slide-1:target ~ .image-container {
+        left: 0px;
+      }
+      #slide-2:target ~ .image-container {
+        left: -500px;
+      }
+      #slide-3:target ~ .image-container {
+        left: -1000px;
+      } 
+      .buttons {
+        position: relative;
+        top: -20px;
+      }
+      .buttons a {
+        display: inline-block;
+        height: 15px;
+        width: 15px;
+        border-radius: 50px;
+        background-color: lightgreen;
+      }
+
+      .reserverBtn {
+        border: 5px solid green;
+        border-radius: 25px;
+        margin-top: 20px;
+        width: 200px;
+      }
+</style>
+{% endblock %}
+
+{% block title %}
+    Recherche de chambres
+{% endblock %}
+
+{% block content %}
+<div class="row div-show-produit d-flex justify-content-center align-items-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="row mb-5">
+                <div class="col-md-7">
+                    <div class="slider">
+                                <span id="slide-1"></span>
+                                <span id="slide-2"></span>
+                                <span id="slide-3"></span>
+                                <div class="image-container">
+                                    <img src="{{ asset('photosChambres/' ~ chambre.photo1) }}" class="slide" width="500" height="300">
+                                    <img src="{{ asset('photosChambres/' ~ chambre.photo2) }}" class="slide" width="500" height="300">
+                                    <img src="{{ asset('photosChambres/' ~ chambre.photo3) }}" class="slide" width="500" height="300">
+                                </div>
+                                <div class="buttons">
+                                    <a href="#slide-1"></a>
+                                    <a href="#slide-2"></a>
+                                    <a href="#slide-3"></a>
+                                </div>
+                        </div>
+                </div>
+                <div class="col-md-5" style="margin-top:20px;">
+                    <h6>Description : {{ chambre.drescription }}</h6>
+                    <h6>prix : <strong>{{ chambre.prix }}€</strong></h6>
+                    <h6>Options : {{ chambre.options }}</h6>
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+             <div class="row" style="margin-top:20px;">
+                <h4> <strong> Paiement </strong> </h4>
+             </div>
+             <div class="row">
+                <div class="col-sm-3 p-3">
+                   Date début : {{ dateDebut }}
+                </div>
+
+                <div class="col-sm-3 p-3">
+                   Date Fin : {{ dateFin }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 p-3"> 
+                  <input class="form-control" type="text" id="prenom" name="prenom" placeholder="Prenom" />
+                </div>
+
+                <div class="col-sm-3 p-3"> 
+                  <input class="form-control" type="text" id="nom" name="nom" placeholder="Nom" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 p-3"> 
+                  <input class="form-control" type="text" id="telephone" name="telephone" placeholder="Telephone" />
+                </div>
+
+                <div class="col-sm-3 p-3"> 
+                  <input class="form-control" type="text" id="email" name="email" placeholder="Email" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 p-3"> 
+                  <input class="form-control" type="number" id="carte" name="carte" placeholder="Carte Bancaire" />
+                </div>
+
+                <div class="col-sm-3 p-3"> 
+                  <input class="form-control" type="date" id="expiration" name="expiration" placeholder="" />
+                </div>
+
+                <div class="col-sm-3 p-3"> 
+                  <input class="form-control" type="number" id="carte" name="carte" placeholder="CVV" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 p-3"> 
+                    <button type="button" class="btn btn-warning reserverBtn">Payer</button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

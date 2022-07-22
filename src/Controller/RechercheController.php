@@ -26,4 +26,18 @@ class RechercheController extends AbstractController
             'chambres' => $chambres,
         ]);
     }
+
+    /**
+     * @Route("/show/{id}", name="app_chambre_show")
+     */
+    public function show($id, SessionInterface $session, ChambreRepository $repo, Request $request) 
+    {   
+        $chambre = $repo->find($id);
+                
+        return $this->render('recherche/show.html.twig', [
+            'chambre' => $chambre,
+            'dateDebut' =>  $session->get("dateDebut"),
+            'dateFin' =>  $session->get("dateFin")
+        ]);
+    }
 }

@@ -74,9 +74,6 @@
     <div class="col-md-2 justify-content-center pt-4">
         <h3>Filtres</h3>
         <ul class="list-group">
-            {# {% for categorie in categories %}
-                <a class="text-decoration-none" href="{{ path('produits_categorie', {id: categorie.id}) }}"> <li class="list-group-item btn btn-primary text-center">{{ categorie.nom }}</li> </a>           
-            {% endfor %} #}
              Restaurant <input type="checkbox" />
              Prix Minimum <input type="number" />
              Prix Maximum <input type="number" />
@@ -115,8 +112,9 @@
                                 <h5>Description : {{ chambre.drescription }}</h5>
                                 <h5>prix : <strong>{{ chambre.prix }}€</strong></h5>
                                 <h5>Options : {{ chambre.options }}</h5>
-
-                                <button type="button" class="btn btn-warning reserverBtn">Reserver</button>
+                                <a  href="{{ path('app_chambre_show', {id: chambre.id}) }}">
+                                  <button type="button" class="btn btn-warning reserverBtn">Reserver</button>
+                               </a>
                             </div>
                         </div>
                     </div>
